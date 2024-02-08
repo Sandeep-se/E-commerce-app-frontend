@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View ,Text, SafeAreaView,Pressable,TextInput,Image, ScrollView} from 'react-native'
+import { View ,Text, SafeAreaView,Pressable,TextInput,Image, ScrollView,StatusBar} from 'react-native'
 import { FontAwesome} from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -91,6 +91,7 @@ function Basket() {
   const noOfproducts=details?.basket?.map((item)=>item.quantity).reduce((prev,curr)=>prev+curr,0)
   return (
     <SafeAreaView>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <View style={{backgroundColor:'#87C4FF',paddingTop:37,height:100}}>
         <Pressable>
           <Text style={{marginLeft:13,paddingBottom:1,fontWeight:'bold',color:'blue'}}>SHOP DAILY</Text>

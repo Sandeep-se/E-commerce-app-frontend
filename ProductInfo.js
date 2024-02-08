@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {ScrollView, View,Pressable,TextInput, ImageBackground, Dimensions, SafeAreaView,Text} from 'react-native'
+import {ScrollView, View,Pressable,TextInput, ImageBackground, Dimensions, SafeAreaView,Text,StatusBar} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -23,6 +23,10 @@ export default function ProductInfo() {
             const userId=await AsyncStorage.getItem('userId')
             const response=await axios.post('/addItemToCart',{item,userId})
             console.log(response.data)
+            if(response.data.message==="signIn")
+            {
+                navigation.push("signIn")
+            }
             setAddedToCart(true)
             setTimeout(()=>
             {
@@ -36,6 +40,7 @@ export default function ProductInfo() {
     }
   return (
     <SafeAreaView backgroundColor="white">
+        <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
         <View style={{backgroundColor:'#87C4FF',paddingTop:37,height:100}}>
             <Pressable>
                 <Text style={{marginLeft:13,paddingBottom:1,fontWeight:'bold',color:'blue',marginLeft:40}}>SHOP DAILY</Text>

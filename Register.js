@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { View,StyleSheet, Text, TextInput,TouchableOpacity, SafeAreaView,Image, KeyboardAvoidingView,Pressable } from 'react-native';
+import { View,StyleSheet, Text, TextInput,TouchableOpacity, SafeAreaView,StatusBar, KeyboardAvoidingView,Pressable } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -34,26 +33,26 @@ export default function Register() {
   return (
     <SafeAreaView>
       <KeyboardAvoidingView>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
         <View style={{backgroundColor:'#87C4FF',paddingTop:50,height:100}}>
           <View style={{flexDirection:'row'}}>
             <Pressable onPress={()=>navigation.pop()} style={{marginLeft:2,paddingTop:9}}>
               <AntDesign name="arrowleft" size={24} color="black" />
             </Pressable>
-            <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10,marginLeft:70}}>
+            <View style={{flex:1,flexDirection:'row',justifyContent: 'center'}}>
               <Text style={{color:'blue',fontSize:30,fontWeight:'bold'}}>SHOP DAILY</Text>
             </View>
           </View>
           </View> 
-        <View>
+        <View style={{alignItems:'center'}}>
           <Text style={{
             fontSize:16,
             fontWeight:'bold',
             marginTop:50,
-            marginHorizontal:80,
             textDecorationLine:'underline'
           }}>Register to your Account</Text>
         </View>
-        <View style={{marginHorizontal:20}}>
+        <View style={{alignItems:'center'}}>
           <View style={{marginTop:70}}>
             <Text >Name</Text>
             <TextInput style={styles.input} placeholder='Enter your name' value={name} onChangeText={(text)=>setName(text)}/>
@@ -71,12 +70,12 @@ export default function Register() {
           </View>
         </View>
         
-        <View style={{marginHorizontal:70}}>
+        <View style={{alignItems:'center'}}>
           <View>
             <Text>Already have Account ? {' '}<Text style={{color:'blue',textDecorationLine:'underline'}} onPress={()=>navigation.push('signIn')}>Sign In</Text></Text>
           </View>
         </View>
-        <View style={{marginHorizontal:90}}>
+        <View style={{alignItems:'center'}}>
           <TouchableOpacity style={styles.button} onPress={handleRegister}>
               <Text style={{color:'white',fontWeight:'bold'}} onPress={handleRegister}>Sign Up</Text>
             </TouchableOpacity>

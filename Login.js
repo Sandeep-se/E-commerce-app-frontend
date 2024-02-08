@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView,View,StyleSheet, Text, TextInput,TouchableOpacity,Image,KeyboardAvoidingView, Alert,Pressable} from 'react-native';
+import { SafeAreaView,View,StyleSheet, Text, TextInput,TouchableOpacity,StatusBar,KeyboardAvoidingView, Alert,Pressable} from 'react-native';
 import { useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -13,7 +12,6 @@ export default function Login() {
   const [flag,setFlag]=useState(true)
   const [showPassword,setShowPassword]=useState(false)
   const navigation=useNavigation()
-
   const login=async()=>  
   {
     try{
@@ -51,27 +49,27 @@ export default function Login() {
   return (
     <KeyboardAvoidingView>
       <SafeAreaView style={styles.container}>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
           <View style={{backgroundColor:'#87C4FF',paddingTop:50,height:100}}>
             <View style={{flexDirection:'row'}}>
               <Pressable onPress={()=>navigation.popToTop()} style={{marginLeft:2,paddingTop:9}}>
                 <AntDesign name="arrowleft" size={24} color="black" />
               </Pressable>
-              <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10,marginLeft:70}}>
+              <View style={{flex:1,flexDirection:'row',justifyContent: 'center'}}>
                 <Text style={{color:'blue',fontSize:30,fontWeight:'bold'}}>SHOP DAILY</Text>
               </View>
             </View>
           </View>
-          <View>
+          <View style={{alignItems:'center'}}>
             <Text style={{
               fontSize:16,
               marginTop:50,
               fontWeight:'bold',
-              marginHorizontal:90,
               textDecorationLine:'underline'
             }}>Login in to your Account</Text>
           </View>
           
-          <View style={{marginLeft:20}}>
+          <View style={{alignItems:'center'}}>
               <View style={{marginTop:70}}>
                 <Text style={[styles.content]} >Email</Text>
                 <TextInput style={styles.input} placeholder='Enter your email' value={email} onChangeText={(text)=>setEmail(text)}/>
@@ -84,8 +82,8 @@ export default function Login() {
                 </Pressable>
               </View>
           </View>
-          <View style={{marginLeft:81}}>{flag?<></>:<Text style={{color:'red'}}>Incorrect email or password</Text>}</View>
-          <View style={{marginHorizontal:100}}>
+          <View style={{alignItems:'center'}}>{flag?<></>:<Text style={{color:'red'}}>Incorrect email or password</Text>}</View>
+          <View style={{alignItems:'center'}}>
             <View>
                 <Text>New User ? {' '}<Text style={{color:'blue',textDecorationLine:'underline'}} onPress={()=>navigation.push('signUp')}>Sign Up</Text></Text>
               </View>

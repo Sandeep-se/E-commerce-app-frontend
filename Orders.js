@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react'
-import { View ,Text, SafeAreaView,Pressable,TextInput,Image, ScrollView} from 'react-native'
+import { View ,Text, SafeAreaView,Pressable,StatusBar,Image, ScrollView} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 import { useCartDetails } from './CartProvider';
@@ -58,12 +58,13 @@ export default function Orders() {
   }
   return (
     <SafeAreaView>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
         <View style={{backgroundColor:'#87C4FF',paddingTop:50,height:100}}>
             <View style={{flexDirection:'row'}}>
               <Pressable onPress={()=>navigation.popToTop()} style={{marginLeft:2,paddingTop:9}}>
                 <AntDesign name="arrowleft" size={24} color="black" />
               </Pressable>
-              <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10,marginLeft:70}}>
+              <View style={{flex:1,flexDirection:'row',justifyContent: 'center'}}>
                 <Text style={{color:'blue',fontSize:30,fontWeight:'bold'}}>SHOP DAILY</Text>
               </View>
             </View>

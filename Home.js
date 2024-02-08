@@ -1,15 +1,17 @@
-import React, { useEffect, useState,useCallback } from 'react'
-import { View,Text, SafeAreaView, ScrollView, Pressable, Platform, TextInput,Image } from 'react-native'
-import { FontAwesome, Zocial } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react'
+import { View,Text, SafeAreaView, ScrollView, Pressable, Platform, TextInput,Image ,StatusBar,Dimensions,usEffect} from 'react-native'
+import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import {SliderBox} from 'react-native-image-slider-box'
-import axios from 'axios';
 import ProductItem from './ProductItem';
 import { useNavigation } from '@react-navigation/native';
+import NetInfo from '@react-native-community/netinfo';
 
-
+const {width}=Dimensions.get('window')
+const imageWidth=(width)/2
 export default function Home() {
   const navigation=useNavigation()
+  const [isConnected,setIsConnected]=useState(true)
   const list = [
     {
       id: "1",
@@ -358,9 +360,22 @@ export default function Home() {
       "rating":{"rate":3.6,"count":145}
     }
   ]
-  
+  useEffect(()=>
+  {
+    const connection=NetInfo.addEventListener(state=>
+      {
+        setIsConnected(state.isConnected);
+        console.log(isConnected)
+      })
+    return ()=>
+    {
+      connection()
+    }
+  },[])
+
   return (
     <SafeAreaView style={{paddingTop:Platform.ios==='android'?40:0,flex:1,backgroundColor:'white'}}>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <View style={{backgroundColor:'#87C4FF',paddingTop:37,height:100}}>
         <Pressable>
           <Text style={{marginLeft:13,paddingBottom:1,fontWeight:'bold',color:'blue'}}>SHOP DAILY</Text>
@@ -413,7 +428,6 @@ export default function Home() {
           inactiveDotColor="#90A4AE"
           ImageComponentStyle={{width:'100%'}}
           />
-
           <Text style={{padding:10,fontSize:18,fontWeight:'bold'}}>Trending Deals of the week</Text>
           <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'center'}}>
             {deals.map((item,index)=>(
@@ -433,7 +447,7 @@ export default function Home() {
                 alignItems:'center',
                 flexWrap:'wrap'
                 }} key={index}>
-                <Image style={{width:180,height:180,resizeMode:'contain'}} source={{uri:item?.image}}/>
+                <Image style={{width:imageWidth,height:imageWidth,resizeMode:'contain'}} source={{uri:item?.image}}/>
               </Pressable>
             ))}
           </View>
@@ -481,10 +495,7 @@ export default function Home() {
           <Text style={{height:1,borderWidth:2 ,borderColor:"#ccc",marginTop:10}}></Text>
           
           <View 
-          style={{
-            flexDirection:'row',
-            flexWrap:'wrap'
-          }}>
+          style={{flexDirection:'row',flexWrap:'wrap'}}>
             {products.map((item,index)=>(
               <ProductItem item={item} key={index}/>
             ))}

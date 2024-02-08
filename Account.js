@@ -1,6 +1,6 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios'
-import { View ,Text, SafeAreaView,Pressable,TextInput, ScrollView} from 'react-native'
+import { View ,Text, SafeAreaView,Pressable,StatusBar, ScrollView} from 'react-native'
 import { useCartDetails } from './CartProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -16,22 +16,22 @@ export default function User() {
   const [order,setOrder]=useState(false)
   let [asyncId,setAsyncId]=useState(null)
   // const [user_Id,setUser_Id]=useState(null)
-  const [location,setLocation]=useState('Location:Not Available')
+  // const [location,setLocation]=useState('Location:Not Available')
   const navigation=useNavigation()
 
-  const fetchLocation=()=>
-  {
-    Geolocation.getCurrentPosition((position)=>
-    {
-      const {latitude,longitude}=position.coords
-      setLocation(`Location:latitude ${latitude} longitude ${longitude}`)
-    },(
-      error=>{setLocation('Location: not available')
-      console.warn(error.err)
-    },
-    { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }))
-    console.log(location)
-  }
+  // const fetchLocation=()=>
+  // {
+  //   Geolocation.getCurrentPosition((position)=>
+  //   {
+  //     const {latitude,longitude}=position.coords
+  //     setLocation(`Location:latitude ${latitude} longitude ${longitude}`)
+  //   },(
+  //     error=>{setLocation('Location: not available')
+  //     console.warn(error.err)
+  //   },
+  //   { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }))
+  //   console.log(location)
+  // }
 
   const logOut=async()=>
   {
@@ -87,6 +87,7 @@ export default function User() {
   },[])
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <View style={{backgroundColor:'#87C4FF',paddingTop:50,height:100}}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10}}>
           <Text style={{color:'blue',fontSize:30,fontWeight:'bold'}}>SHOP DAILY</Text>

@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Text,TextInput,View ,Pressable} from 'react-native'
+import { Text,TextInput,View ,Pressable,StatusBar,SafeAreaView} from 'react-native'
 import { useCartDetails } from './CartProvider';
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native';
@@ -35,14 +35,14 @@ export default function UserInfo() {
         return ;
     }
   return (
-    <View>
-
+    <SafeAreaView>
+        <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
         <View style={{backgroundColor:'#87C4FF',paddingTop:50,height:100}}>
             <View style={{flexDirection:'row'}}>
               <Pressable onPress={()=>navigation.popToTop()} style={{marginLeft:2,paddingTop:9}}>
                 <AntDesign name="arrowleft" size={24} color="black" />
               </Pressable>
-              <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10,marginLeft:70}}>
+              <View style={{flex:1,flexDirection:'row',justifyContent: 'center'}}>
                 <Text style={{color:'blue',fontSize:30,fontWeight:'bold'}}>SHOP DAILY</Text>
               </View>
             </View>
@@ -81,6 +81,6 @@ export default function UserInfo() {
             </View>
             
         </View>
-    </View>
+    </SafeAreaView>
   )
 }
